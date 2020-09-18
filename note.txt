@@ -1,0 +1,49 @@
+
+
+Overall Formula: 
+    CC Chance = Base Chance * Gear/Book/Card Multiplier * Base Stat Multiplier
+    CC Duration = Base Duration * Gear/Book/Card Multiplier * Base Stat Multiplier
+
+Gear multiplier example: Meteorite Armor 50% stun/freeze resist.
+
+Base Stat Multiplier = 1 + A - B
+        A = Increase from user base stats.
+        B = Decrease from target base stats.
+
+Base Stat Multiplier Formulas
+Stun:
+    Chance: A = STR * 0.2/100, max value = 0.6, B = (VIT + AGI) * 0.2/100, max value = 1
+    Duration: A = STR * 0.3/100, max value = 0.8. B = VIT * 0.4/100, max value = 1
+Fear:
+    Chance: A = DEX * 0.3/100, max value = 0.6, B = (INT + LUK) * 0.2/100, max value = 1
+    Duration: A = DEX * 0.3/100, max value = 0.8. B = INT * 0.4/100, max value = 1
+Sleep:
+    Chance: A = DEX * 0.2/100, max value = 0.6, B = (INT + LUK) * 0.2/100, max value = 1
+    Duration: A = DEX * 0.3/100, max value = 0.8. B = INT * 0.4/100, max value = 1
+Freeze:
+    Chance: A = INT * 0.2/100, max value = 0.6, B = (INT + DEX) * 0.2/100, max value = 1
+    Duration: A = INT * 0.3/100, max value = 0.8. B = INT * 0.4/100, max value = 1
+Poison:
+    Chance: A = LUK * 0.3/100, max value = 0.8, B = (VIT + INT) * 0.2/100, max value = 1
+    Duration: A = LUK * 0.2/100, max value = 0.8. B = VIT * 0.4/100, max value = 1
+Petrify:
+    Chance: A = INT * 0.2/100, max value = 0.6, B = (INT + DEX) * 0.2/100, max value = 1
+    Duration: A = INT * 0.3/100, max value = 0.8. B = INT * 0.4/100, max value = 1
+Silence:
+    Chance: A = DEX * 0.2/100, max value = 1, B = (VIT + STR) * 0.2/100, max value = 1
+    Duration: A = DEX * 0.3/100, max value = 0.8. B = VIT * 0.4/100, max value = 1
+Slow/Snare:
+    Chance: A = AGI* 0.2/100, max value = 0.6, B = (VIT + STR) * 0.2/100, max value = 1
+    Duration: A = AGI* 0.3/100, max value = 0.8. B = VIT * 0.4/100, max value = 1
+Burn:
+    Chance: A = INT* 0.3/100, max value = 0.8, B = (VIT + AGI) * 0.2/100, max value = 1
+    Duration: A = INT* 0.3/100, max value = 0.8. B = VIT * 0.4/100, max value = 1
+Curse:
+    Chance: A = STR* 0.3/100, max value = 0.6, B = (INT + DEX) * 0.3/100, max value = 1
+    Duration: A = STR* 0.3/100, max value = 0.8. B = INT * 0.4/100, max value = 1
+Blind:
+    Chance: A = STR* 0.3/100, max value = 1, B = (INT + DEX) * 0.2/100, max value = 1
+    Duration: A = STR* 0.3/100, max value = 0.8. B = INT* 0.4/100, max value = 1
+Bleed:
+    Chance: A = INT* 0.3/100, max value = 0.8, B = (VIT + INT) * 0.2/100, max value = 1
+    Duration: A = INT* 0.3/100, max value = 0.8. B = VIT * 0.4/100, max value = 1
