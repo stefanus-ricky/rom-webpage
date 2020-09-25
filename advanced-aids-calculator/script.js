@@ -1,5 +1,3 @@
-
-// edit back freeze-atk, dex just for test
 const debuffFormula = {
   "stun-chance-atk": { str: 0.2, max: 0.6 },
   "stun-chance-res": { vit: 0.2, agi: 0.2, max: 1 },
@@ -7,7 +5,7 @@ const debuffFormula = {
   "fear-chance-res": { int: 0.2, luk: 0.2, max: 1 },
   "sleep-chance-atk": { dex: 0.2, max: 0.6 },
   "sleep-chance-res": { int: 0.2, luk: 0.2, max: 1 },
-  "freeze-chance-atk": { int: 0.2, dex:0.1, max: 0.6 },
+  "freeze-chance-atk": { int: 0.2, max: 0.6 },
   "freeze-chance-res": { int: 0.2, dex: 0.2, max: 1 },
   "poison-chance-atk": { luk: 0.3, max: 0.8 },
   "poison-chance-res": { vit: 0.2, int: 0.2, max: 1 },
@@ -25,7 +23,6 @@ const debuffFormula = {
   "burn-chance-res": { vit: 0.2, agi: 0.2, max: 1 },
   "bleed-chance-atk": { int: 0.3, max: 0.8 },
   "bleed-chance-res": { vit: 0.2, int: 0.2, max: 1 },
-  
 
   "stun-duration-atk": { str: 0.3, max: 0.8 },
   "stun-duration-res": { vit: 0.4, max: 1 },
@@ -53,88 +50,66 @@ const debuffFormula = {
   "bleed-duration-res": { vit: 0.4, max: 1 }
 };
 
+function newFunction() {}
 
-
-function newFunction(table) {
-  
+function myFunction() {
   // resist-table ==> trTable ==> tdRows
   const resTable = document.getElementById("resist-table").childNodes;
   const trTable = filterElement(resTable, "TR");
-  
-  
   // will loop through the trTable
   for (let i = 0; i < trTable.length; i++) {
-    console.log(trTable[i]);
     // parse the stats needed from the dictionary, using table id as input
     // {stats:float,..., max:float}
     // {agi:0.2, str:0.2, max:1}
     let parsedStats = Object.entries(debuffFormula[trTable[i].id]);
 
-
-    for (let i2 = 0; i2 < parsedStats.length - 1; i2++) {
-    // loop to iterate the tdRows
+    // add loop to iterate the tdRows
     // parsedStats have max variable included, so length-1
+    for (let i2 = 0; i2 < parsedStats.length - 1; i2++) {
       calcResist(trTable[i], parsedStats[i2]);
     }
     updateSum(trTable[i]);
   }
-  
-  
 
   // ----------------------------------------------------------------------------------------------------------------------------
-/*
-  console.log("testing calcEnemyBonus");
-  
-  // trTable[i].id]
-  let trId = "freeze-chance-res";
-  let arr = trId.split('-');
-  let parseSentence= arr[0]+'-'+ arr[1] + '-' +'atk';
-  let parsedEnemyStats = Object.entries(debuffFormula[parseSentence]);
-  let bonusSum = 0;
-  let bonusMax = parsedEnemyStats[parsedEnemyStats.length];
-  console.log(`bonusMax is ${bonusMax} `);
-
-  console.log(`parseSentence is ${parseSentence} parsedEnemyStats is ${parsedEnemyStats}`);
-  
-  
-  
-  for (let i2 = 0; i2 < parsedEnemyStats.length - 1; i2++) {
-  // loop to iterate trTable, no need to iterate tdRow
-    console.log(i2);
-    console.log(calcEnemyBonus(parsedEnemyStats[i2]));
-    bonusSum = Number((bonusSum + calcEnemyBonus(parsedEnemyStats[i2])).toFixed(2));
-    updateEnemyBonus(trTable, bonusSum, bonusMax);
-    
-  }
-  console.log(bonusSum);
-*/  
-  // ----------------------------------------------------------------------------------------------------------------------------
+  // enemy stats calculation
   // will loop through the trTable
   for (let i = 0; i < trTable.length; i++) {
-    console.log(trTable[i]);
-    // parse the stats needed from the dictionary, using table id as input
-    // {stats:float,..., max:float}
-    // {agi:0.2, str:0.2, max:1}
     let parsedStats = Object.entries(debuffFormula[trTable[i].id]);
-    
+
     // parse TYPE OF STATS of enemy needed
     let trId = trTable[i].id;
-    let arr = trId.split('-');
-    let parseSentence= arr[0]+'-'+ arr[1] + '-' +'atk';
+    let arr = trId.split("-");
+    let parseSentence = arr[0] + "-" + arr[1] + "-" + "atk";
     let parsedEnemyStats = Object.entries(debuffFormula[parseSentence]);
-    
+
     // index = 0 because bonus always use 1 stats
-    console.log(calcEnemyBonus(parsedEnemyStats[0]));
-    let bonusSum = Number((calcEnemyBonus(parsedEnemyStats[0])).toFixed(2));
+    let bonusSum = Number(calcEnemyBonus(parsedEnemyStats[0]).toFixed(2));
     let bonusMax = parsedEnemyStats[parsedEnemyStats.length];
-    
+
     updateEnemyBonus(trTable[i], bonusSum, bonusMax);
-
+    updateFinalSum(trTable[i]);
   }
-  // ----------------------------------------------------------------------------------------------------------------------------
-  
-
 }
+
+function updateFinalSum(trTable) {
+  const sumBlock = getChildWithClass(trTable, "final-sum");
+
+  sumBlock.textContent = 0;
+  const resistSum = parseFloat(getChildWithClass(trTable, "sum").textContent);
+  const enemyBonus = parseFloat(
+    getChildWithClass(trTable, "enemy-bonus").textContent
+  );
+  const finalSum = (resistSum - enemyBonus).toFixed(2);
+  if (finalSum >= 0) {
+    sumBlock.textContent = finalSum;
+    sumBlock.style.color = "green";
+  } else {
+    sumBlock.textContent = finalSum;
+    sumBlock.style.color = "red";
+  }
+}
+
 function updateEnemyBonus(trTable, bonusSum, max) {
   let sumBlock = getChildWithClass(trTable, "enemy-bonus");
   sumBlock.textContent = 0;
@@ -149,10 +124,10 @@ function updateEnemyBonus(trTable, bonusSum, max) {
   }
 }
 
-function calcEnemyBonus(parsedStats){
+function calcEnemyBonus(parsedStats) {
   const enemyStats = getEnemyStats();
   let bonus = (enemyStats[parsedStats[0]] * parsedStats[1]) / 100;
-  console.log(`enemyStats[parsedStats[0]] is ${enemyStats[parsedStats[0]]} and parsedStats[1] is ${parsedStats[1]}`)
+  // console.log(`enemyStats[parsedStats[0]] is ${enemyStats[parsedStats[0]]} and parsedStats[1] is ${parsedStats[1]}`)
   return Number(bonus.toFixed(2));
 }
 
@@ -162,6 +137,29 @@ function calcResist(trTable, parsedStats) {
   let playerStats = getPlayerStats();
   let resist = (playerStats[parsedStats[0]] * parsedStats[1]) / 100;
   tdTable.textContent = resist.toFixed(2);
+}
+
+// will calculate the sum of result
+//  @param element = row table nodes
+function calcSum(element) {
+  const child = element.childNodes;
+  let sum = 0;
+  for (let index = 0; index < child.length; index++) {
+    //hotfix of double calculation
+    if (
+      child[index].className === "enemy-bonus" ||
+      child[index].className === "final-sum" ||
+      child[index].className === "sum"
+    ) {
+      continue;
+    }
+    let value = parseFloat(child[index].textContent);
+    if (!isNaN(value)) {
+      sum = Math.round(value * 100 + sum * 100) / 100;
+    }
+    //console.log(`Sum is ${sum} and value is ${value} is child[index].textContent is ${child[index].textContent}`);
+  }
+  return sum;
 }
 
 function updateSum(trTable) {
@@ -175,27 +173,6 @@ function updateSum(trTable) {
   } else {
     sumBlock.textContent = resistSum;
     sumBlock.style.color = "black";
-  }
-}
-
-function myFunction() {
-  // resist-table ==> trTable ==> tdRows
-  const resTable = document.getElementById("resist-table").childNodes;
-  const trTable = filterElement(resTable, "TR");
-  // will loop through the trTable
-  for (let i = 0; i < trTable.length; i++) {
-    console.log(trTable[i]);
-    // parse the stats needed from the dictionary, using table id as input
-    // {stats:float,..., max:float}
-    // {agi:0.2, str:0.2, max:1}
-    let parsedStats = Object.entries(debuffFormula[trTable[i].id]);
-
-    // add loop to iterate the tdRows
-    // parsedStats have max variable included, so length-1
-    for (let i2 = 0; i2 < parsedStats.length - 1; i2++) {
-      calcResist(trTable[i], parsedStats[i2]);
-    }
-    updateSum(trTable[i]);
   }
 }
 
@@ -249,44 +226,9 @@ function getEnemyStats() {
   };
 }
 
-function printObj(obj) {
-  for (const [key, value] of Object.entries(obj)) {
-    console.log(`${key}: ${value}`);
-  }
-}
-
 // to filter input, only accept number
 function isNumberKey(evt) {
   var charCode = evt.which ? evt.which : evt.keyCode;
   if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
   return true;
-}
-
-// will calculate the sum of result
-//  @param element = row table nodes
-function calcSum(element) {
-  const child = element.childNodes;
-  let sum = 0;
-  for (let index = 0; index < child.length; index++) {
-    let value = parseFloat(child[index].textContent);
-    if (!isNaN(value)) {
-      sum = Math.round(value * 100 + sum * 100) / 100;
-    }
-    //console.log(`Sum is ${sum} and value is ${value} is value NaN${isNaN(value)}`);
-  }
-  return sum;
-}
-
-// untested
-// function to take all stats of the table?
-function getAttackerStats(element, stat) {
-  const child = element.childNodes;
-  let arr = [];
-  for (let index = 0; index < child.length; index++) {
-    let value = parseFloat(child[index].textContent);
-    if (!isNaN(value)) {
-      arr.push(value);
-    }
-  }
-  return arr;
 }
