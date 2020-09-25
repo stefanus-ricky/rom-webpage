@@ -7,12 +7,15 @@
   <meta name="viewport" content="width=device-width">
     <title>ROM AIDS calculator</title>
     
-    <!-- import the webpage's stylesheet -->
+    <!-- import the webpage's stylesheet 
+advanced-aids-calculator
+
+-->
     <link rel="stylesheet" href="/style.css">
     
     <!-- import the webpage's javascript file -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" jquery></script>
-    <script src="/script.js" defer></script>
+    <script src="/advanced-aids-calculator/script.js" defer></script>
   </head>  
   <body>
     <h1>EP 7 Status Effect Formulas(with enemy stats):</h1>
@@ -45,12 +48,12 @@
       
        <tr>
         <th scope="row">Enemy stats</th>
-        <td id="str_b"><input type="text" onkeypress="return isNumberKey(event)" id="textstr_b" value="100"></td>
-        <td id="agi-b"><input type="text" onkeypress="return isNumberKey(event)" id="textagi_b" value="100"></td>
-        <td id="vit-b"><input type="text" onkeypress="return isNumberKey(event)" id="textvit_b" value="100"></td>
-        <td id="int-b"><input type="text" onkeypress="return isNumberKey(event)" id="textint_b" value="100"></td>
-        <td id="dex-b"><input type="text" onkeypress="return isNumberKey(event)" id="textdex_b" value="100"></td>
-        <td id="luk-b"><input type="number" onkeypress="return isNumberKey(event)" id="textluk_b" value="100"></td>
+        <td id="str-b"><input type="text" onkeypress="return isNumberKey(event)" id="textstr-b" value="100"></td>
+        <td id="agi-b"><input type="text" onkeypress="return isNumberKey(event)" id="textagi-b" value="100"></td>
+        <td id="vit-b"><input type="text" onkeypress="return isNumberKey(event)" id="textvit-b" value="100"></td>
+        <td id="int-b"><input type="text" onkeypress="return isNumberKey(event)" id="textint-b" value="100"></td>
+        <td id="dex-b"><input type="text" onkeypress="return isNumberKey(event)" id="textdex-b" value="100"></td>
+        <td id="luk-b"><input type="number" onkeypress="return isNumberKey(event)" id="textluk-b" value="100"></td>
       </tr> 
       
     </tbody>
@@ -77,6 +80,9 @@
               <th scope="col">DEX</th>
               <th scope="col">LUK</th>
               <th scope="col" class="sum">SUM</th>
+              <th scope="col" class="enemy-bonus">ENEMY BONUS</th>
+              <th scope="col" class="final-sum">FINAL SUM</th>
+              
             </tr>
           </thead>
              <!--   -------------------------------------------------------------------------------------------------------------------------------- -->
@@ -91,6 +97,9 @@
               <td id="dex1" class="dex"></td>
               <td id="luk1" class="luk"></td>
               <td id="sum1" class="sum"></td>
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
+              
             </tr>
              <tr id="stun-duration-res">
               <th scope="row">Stun duration res</th>
@@ -101,6 +110,8 @@
               <td id="dex2" class="dex"></td>
               <td id="luk2" lass="luk"></td>
               <td id="sum2" class="sum"></td>
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="freeze-chance-res">
               <th scope="row">Freeze chance res</th>
@@ -111,6 +122,8 @@
               <td id="dex3" class="dex"></td>
               <td id="luk3" lass="luk"></td>
               <td id="sum3" class="sum"></td>
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="freeze-duration-res">
               <th scope="row">Freeze duration res</th>
@@ -120,7 +133,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="fear-chance-res">
               <th scope="row">Fear chance res</th>
@@ -130,7 +145,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="fear-duration-res">
               <th scope="row">Fear duration res</th>
@@ -140,7 +157,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="poison-chance-res">
               <th scope="row">Poison chance res</th>
@@ -150,7 +169,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="poison-duration-res">
               <th scope="row">Poison duration res</th>
@@ -160,7 +181,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="petrify-chance-res">
               <th scope="row">Petrify chance res</th>
@@ -170,7 +193,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="petrify-duration-res">
               <th scope="row">Petrify duration res</th>
@@ -180,7 +205,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="silence-chance-res">
               <th scope="row">Silence chance res</th>
@@ -190,7 +217,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="silence-duration-res">
               <th scope="row">Silence duration res</th>
@@ -200,7 +229,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>            
             <tr id="snare-chance-res">
               <th scope="row">Snare chance res</th>
@@ -210,7 +241,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="snare-duration-res">
               <th scope="row">Snare duration res</th>
@@ -220,7 +253,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="curse-chance-res">
               <th scope="row">Curse chance res</th>
@@ -230,7 +265,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>            
             <tr id="curse-duration-res">
               <th scope="row">Curse duration res</th>
@@ -240,7 +277,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="blind-chance-res">
               <th scope="row">Blind chance res</th>
@@ -250,7 +289,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>            
             <tr id="blind-duration-res">
               <th scope="row">Blind duration res</th>
@@ -260,7 +301,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="burn-chance-res">
               <th scope="row">Burn chance res</th>
@@ -270,7 +313,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="burn-duration-res">
               <th scope="row">Burn duration res</th>
@@ -280,7 +325,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="bleed-chance-res">
               <th scope="row">Bleed chance res</th>
@@ -290,7 +337,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             <tr id="bleed-duration-res">
               <th scope="row">Bleed duration res</th>
@@ -300,7 +349,9 @@
               <td class="int"></td>
               <td class="dex"></td>
               <td class="luk"></td>
-              <td class="sum"></td>
+              <td class="sum"></td>              
+              <td class="enemy-bonus"></td>
+              <td class="final-sum"></td>
             </tr>
             
 
