@@ -85,7 +85,8 @@ function myFunction() {
 
     // index = 0 because bonus always use 1 stats
     let bonusSum = Number(calcEnemyBonus(parsedEnemyStats[0]).toFixed(2));
-    let bonusMax = parsedEnemyStats[parsedEnemyStats.length];
+    let bonusMax = parsedEnemyStats[parsedEnemyStats.length-1][1];
+    console.log(bonusMax)
 
     updateEnemyBonus(trTable[i], bonusSum, bonusMax);
     updateFinalSum(trTable[i]);
@@ -110,13 +111,11 @@ function updateFinalSum(trTable) {
   }
 }
 
-function updateEnemyBonus(trTable, bonusSum, max) {
+function updateEnemyBonus(trTable, bonusSum, bonusMax) {
   let sumBlock = getChildWithClass(trTable, "enemy-bonus");
   sumBlock.textContent = 0;
-
-  let maxResist = debuffFormula[trTable.id].max;
-  if (bonusSum > maxResist) {
-    sumBlock.textContent = maxResist + "(max)";
+  if (bonusSum > bonusMax) {
+    sumBlock.textContent = bonusMax + "(max)";
     sumBlock.style.color = "red";
   } else {
     sumBlock.textContent = bonusSum;
